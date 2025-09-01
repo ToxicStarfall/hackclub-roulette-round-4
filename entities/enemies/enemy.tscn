@@ -1,0 +1,63 @@
+[gd_scene load_steps=12 format=3 uid="uid://cx7408xn61vd7"]
+
+[ext_resource type="Script" uid="uid://ci4du2v0sne0a" path="res://entities/enemies/enemy.gd" id="1_msovg"]
+[ext_resource type="Texture2D" uid="uid://ona7fs5aqntt" path="res://icon.svg" id="2_wqcwe"]
+[ext_resource type="Script" uid="uid://ccd6qsohrm1y6" path="res://entities/states/state_machine.gd" id="3_5lf1o"]
+[ext_resource type="Script" uid="uid://cqnbkier15avq" path="res://components/health_component.gd" id="3_gj3y3"]
+[ext_resource type="Script" uid="uid://cpo5j3cl63n8g" path="res://entities/states/follow_path.gd" id="3_msovg"]
+[ext_resource type="Script" uid="uid://bh6cqtnko4j6x" path="res://components/attack_component.gd" id="4_56i32"]
+[ext_resource type="Script" uid="uid://d04s5a06kemh" path="res://components/resources/damage.gd" id="5_gj3y3"]
+[ext_resource type="Script" uid="uid://d0y3o51r8gh1i" path="res://components/hitbox_component.gd" id="5_sb13e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipr6v"]
+size = Vector2(32, 32)
+
+[sub_resource type="Resource" id="Resource_56i32"]
+script = ExtResource("5_gj3y3")
+value = 1
+source = 1
+metadata/_custom_type_script = "uid://d04s5a06kemh"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3udgd"]
+size = Vector2(32, 32)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_msovg")
+faction = 2
+metadata/_custom_type_script = "uid://ci4du2v0sne0a"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_wqcwe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ipr6v")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_gj3y3")
+metadata/_custom_type_script = "uid://cqnbkier15avq"
+
+[node name="AttackComponent" type="Node" parent="."]
+script = ExtResource("4_56i32")
+DamageComp = SubResource("Resource_56i32")
+metadata/_custom_type_script = "uid://bh6cqtnko4j6x"
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("5_sb13e")
+metadata/_custom_type_script = "uid://d0y3o51r8gh1i"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_3udgd")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_5lf1o")
+initial_state = NodePath("FollowPath")
+metadata/_custom_type_script = "uid://ccd6qsohrm1y6"
+
+[node name="FollowPath" type="Node" parent="StateMachine"]
+script = ExtResource("3_msovg")
+movement_speed = 200.0
+metadata/_custom_type_script = "uid://cpo5j3cl63n8g"

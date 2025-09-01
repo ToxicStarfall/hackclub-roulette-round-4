@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk6rrvg0y63me"]
+
+[ext_resource type="Script" uid="uid://c3gju15oe4the" path="res://entities/allies/ally.gd" id="1_xk6w7"]
+[ext_resource type="Texture2D" uid="uid://ona7fs5aqntt" path="res://icon.svg" id="2_rdpwe"]
+[ext_resource type="Script" uid="uid://cqnbkier15avq" path="res://components/health_component.gd" id="3_y5qyd"]
+[ext_resource type="Script" uid="uid://d0y3o51r8gh1i" path="res://components/hitbox_component.gd" id="4_0al3i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xk6w7"]
+size = Vector2(64, 64)
+
+[node name="HomePoint" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_xk6w7")
+faction = 1
+metadata/_custom_type_script = "uid://c3gju15oe4the"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_rdpwe")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_y5qyd")
+metadata/_custom_type_script = "uid://cqnbkier15avq"
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_0al3i")
+metadata/_custom_type_script = "uid://d0y3o51r8gh1i"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_xk6w7")
