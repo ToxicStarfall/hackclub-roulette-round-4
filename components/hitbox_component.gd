@@ -16,13 +16,13 @@ func _ready() -> void:
 
 
 func _on_hitbox_area_entered(area):
-	print(area, " entered hitbox")
+	#print(area, " entered hitbox")
 	hit.emit(area.get_damage())
 
 
 func _on_hitbox_body_entered(body):
 	# Physical/Melee/Body damage here.
-	print(body, " entered hitbox")
+	#print(body, " entered hitbox")
 	if body.faction != get_parent().faction:  # Prevent damaging self
 		hit.emit(body.get_damage())
 		if body is Projectile:

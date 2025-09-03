@@ -8,8 +8,8 @@ extends Node
 @export var projectile_damage: int = 1
 
 ## Modifiers which alter stats of default damage comp depending on current action/state.
-@export var attacks: Dictionary[String, Damage] = {}
-@export var AttackMods: Dictionary = {}
+#@export var attacks: Dictionary[String, Damage] = {}
+#@export var AttackMods: Dictionary = {}
 
 
 # Returns modified DamageComp based on current action/state

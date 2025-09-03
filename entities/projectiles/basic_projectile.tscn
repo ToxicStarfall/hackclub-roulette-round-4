@@ -1,19 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bwdgm3g1m85m7"]
+[gd_scene load_steps=5 format=3 uid="uid://bwdgm3g1m85m7"]
 
 [ext_resource type="Script" uid="uid://c2u8xr0rrax7t" path="res://entities/projectiles/projectile.gd" id="1_0exwr"]
 [ext_resource type="Texture2D" uid="uid://ona7fs5aqntt" path="res://icon.svg" id="2_roc4m"]
 [ext_resource type="Script" uid="uid://cqnbkier15avq" path="res://components/health_component.gd" id="3_7584f"]
-[ext_resource type="Script" uid="uid://d0y3o51r8gh1i" path="res://components/hitbox_component.gd" id="3_roc4m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3uisd"]
 radius = 6.0
 
-[node name="BasicProjectile" type="CharacterBody2D"]
-collision_layer = 8
+[node name="BasicProjectile" type="Area2D"]
 collision_mask = 0
-input_pickable = true
+monitoring = false
 script = ExtResource("1_0exwr")
-metadata/_custom_type_script = "uid://cet8l1dt55dva"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.063, 0.063)
@@ -22,15 +19,8 @@ texture = ExtResource("2_roc4m")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_3uisd")
 
-[node name="HitboxComponent" type="Area2D" parent="."]
-visible = false
-collision_layer = 8
-collision_mask = 6
-monitoring = false
-monitorable = false
-script = ExtResource("3_roc4m")
-metadata/_custom_type_script = "uid://d0y3o51r8gh1i"
-
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_7584f")
 metadata/_custom_type_script = "uid://cqnbkier15avq"
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]

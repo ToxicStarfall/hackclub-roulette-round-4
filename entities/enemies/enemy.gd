@@ -17,3 +17,6 @@ func setup():
 #@export var chase_radius: float = 300.0
 #@export var detection_radius: float = 200.0
 #@export var follow_radius: float = 50.0
+
+func get_distance_to_home():
+	pass

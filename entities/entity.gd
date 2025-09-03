@@ -3,7 +3,7 @@ extends CharacterBody2D
 #extends Node2D
 
 enum Factions {
-	NONE, ALLIED, ENEMY
+	NONE, ALLY, ENEMY
 }
 #enum EntityTypes {
 	#BASIC,
@@ -15,7 +15,7 @@ enum Factions {
 
 @export var faction: Factions
 
-#@export_group("Body Parts")
+@export_group("Body Parts")
 #@export var turrets: Array = []
 #@export var legs: Array = []
 
@@ -32,6 +32,7 @@ enum Factions {
 var HitboxComp: HitboxComponent
 var HealthComp: HealthComponent
 var AttackComp: AttackComponent
+var TargetingComp: TargetingComponent
 #var MovementComp: MovementComponent
 
 
@@ -45,6 +46,7 @@ func setup():
 	if has_node("HealthComponent"): HealthComp = $HealthComponent
 	if has_node("AttackComponent"): AttackComp = $AttackComponent
 	#if has_node("MovementComponent"): MovementComp = $MovementComponent
+	if has_node("TargetingComponent"): TargetingComp = $TargetingComponent
 
 	if HitboxComp:
 		HitboxComp.hit.connect( _on_hitbox_hit )
@@ -55,6 +57,8 @@ func setup():
 	# 	AttackComp
 	#if MovementComp:
 		#MovementComp
+	if TargetingComp:
+		pass
 
 	add_to_group("entities")
 
@@ -89,23 +93,19 @@ func kill():
 		#get_parent().score += 5
 		pass
 	#if self is Player: get_parent().game_loss()
-	else:
+	#else:
 		#await $"SparksParticles".finished
-		queue_free()
+	queue_free()
 
 
 func get_health():
 	if HealthComp: return HealthComp.health
 
-
 func get_damage():
 	if AttackComp: return AttackComp.DamageComp
-
 
 # func get_faction():
 # 	return faction
 
-
-func get_target(target_filter):
-
-	pass
+func get_new_target():
+	if TargetingComp: return TargetingComp.get_target()

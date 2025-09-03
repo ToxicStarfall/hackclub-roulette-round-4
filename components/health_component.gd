@@ -21,12 +21,12 @@ func apply_damage(damage_comp):
 
 
 func heal(amount):
-	print(get_parent(), " healed for amount: ", amount)
+	#print(get_parent(), " healed for amount: ", amount)
 	health = min(health + amount, max_health)
 
 
 func damage(amount):
-	print(get_parent(), " damaged for amount: ", amount)
+	#print(get_parent(), " damaged for amount: ", amount)
 	health = max(health - amount, 0)
 
 	if amount > 0:
