@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://bwdgm3g1m85m7"]
 
-[ext_resource type="Script" uid="uid://c2u8xr0rrax7t" path="res://entities/projectiles/projectile.gd" id="1_0exwr"]
-[ext_resource type="Texture2D" uid="uid://ona7fs5aqntt" path="res://icon.svg" id="2_roc4m"]
+[ext_resource type="Script" uid="uid://b8jr77443mmhf" path="res://entities/projectiles/projectile.gd" id="1_0exwr"]
+[ext_resource type="Texture2D" uid="uid://qf50deb2r7ts" path="res://maps/buildings.png" id="2_7584f"]
 [ext_resource type="Script" uid="uid://cqnbkier15avq" path="res://components/health_component.gd" id="3_7584f"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3uisd"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_roc4m"]
 radius = 6.0
 
 [node name="BasicProjectile" type="Area2D"]
@@ -13,11 +13,13 @@ monitoring = false
 script = ExtResource("1_0exwr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.063, 0.063)
-texture = ExtResource("2_roc4m")
+texture = ExtResource("2_7584f")
+region_enabled = true
+region_rect = Rect2(35, 20, 26, 10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3uisd")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_roc4m")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_7584f")

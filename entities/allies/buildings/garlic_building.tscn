@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckd0eam461mw3"]
+
+[ext_resource type="Script" uid="uid://c8l8o2j2kosa6" path="res://entities/allies/buildings/building.gd" id="1_p54em"]
+[ext_resource type="Texture2D" uid="uid://qf50deb2r7ts" path="res://maps/buildings.png" id="2_k2bfd"]
+
+[node name="Garlic" type="CharacterBody2D"]
+script = ExtResource("1_p54em")
+metadata/_custom_type_script = "uid://c8l8o2j2kosa6"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_k2bfd")
+region_enabled = true
+region_rect = Rect2(0, 48, 32, 48)

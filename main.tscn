@@ -1,18 +1,18 @@
-[gd_scene load_steps=12 format=4 uid="uid://bbq6vsd61lnt3"]
+[gd_scene load_steps=19 format=3 uid="uid://bbq6vsd61lnt3"]
 
-[ext_resource type="TileSet" uid="uid://5133eert5ruj" path="res://tileset.tres" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://d2e1a4ei722g0" path="res://levels/level.gd" id="1_lquwl"]
-[ext_resource type="Script" uid="uid://d4nicrvnpmdng" path="res://components/entity_spawner.gd" id="2_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://c0erw0ltjwxou" path="res://entities/allies/basic_turret.tscn" id="3_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://cx7408xn61vd7" path="res://entities/enemies/enemy.tscn" id="3_h2yge"]
-[ext_resource type="PackedScene" uid="uid://dk6rrvg0y63me" path="res://entities/allies/home_point.tscn" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://cmko5y7034c5x" path="res://building_bar.gd" id="7_272bh"]
-
-[sub_resource type="Curve2D" id="Curve2D_ig7tw"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 832, -16, 0, 0, 0, 0, 832, 384, 0, 0, 0, 0, 576, 384, 0, 0, 0, 0, 576, 224, 0, 0, 0, 0, 320, 224, 0, 0, 0, 0, 320, 592)
-}
-point_count = 6
+[ext_resource type="Script" uid="uid://b1b35so8tn8i3" path="res://world.gd" id="1_4c57u"]
+[ext_resource type="Script" uid="uid://rufqwyfusb78" path="res://main.gd" id="1_7mycd"]
+[ext_resource type="Texture2D" uid="uid://qf50deb2r7ts" path="res://maps/buildings.png" id="5_5vw27"]
+[ext_resource type="Script" uid="uid://cb05f403pgtmd" path="res://ui/screens/start_menu.gd" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://dea7hp5rochx7" path="res://ui/tile_selector.png" id="7_5vw27"]
+[ext_resource type="Script" uid="uid://cmko5y7034c5x" path="res://ui/building_bar.gd" id="7_272bh"]
+[ext_resource type="Script" uid="uid://dldlrtk00hikh" path="res://ui/building_button.gd" id="7_dg77c"]
+[ext_resource type="Script" uid="uid://ci0gj38bkxtn7" path="res://ui/screens/game_screen.gd" id="7_kek77"]
+[ext_resource type="Theme" uid="uid://ciej2dtkem6gu" path="res://ui/building_button_theme.tres" id="8_4c57u"]
+[ext_resource type="PackedScene" uid="uid://dwo8fgn87llre" path="res://ui/screens/game_loss_screen.tscn" id="8_dg77c"]
+[ext_resource type="Script" uid="uid://bqprl0sd6r3g2" path="res://game_win_screen.gd" id="8_w48qg"]
+[ext_resource type="Texture2D" uid="uid://cbw2yfgsx6gx2" path="res://plants_vs_gophers_background.png" id="8_ycdy4"]
+[ext_resource type="PackedScene" uid="uid://l15oaltcdivk" path="res://ui/screens/help_screen.tscn" id="11_dg77c"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7mycd"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
@@ -27,65 +27,53 @@ border_width_top = 4
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0xm2m"]
 bg_color = Color(0.4, 0.4, 0.4, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kek77"]
+atlas = ExtResource("5_5vw27")
+region = Rect2(0, 0, 32, 47)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ycdy4"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+border_width_left = 2
+border_width_top = 2
+
 [node name="Main" type="Node"]
+script = ExtResource("1_7mycd")
 
-[node name="World" type="Node2D" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 
-[node name="Level" type="Node2D" parent="World"]
-script = ExtResource("1_lquwl")
-
-[node name="TileMapLayer" type="TileMapLayer" parent="World/Level"]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAACAAEAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAIAAAAAAAAAAAAEAAMAAAAAAAAAAAAFAAMAAAAAAAAAAAAGAAMAAAAAAAAAAAAGAAQAAAAAAAAAAAAGAAUAAAAAAAAAAAAGAAYAAAAAAAAAAAAGAAcAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAUAAAAAAAAAAAADABAAAAAAAAAAAAAEABAAAAAAAAAAAAAFABAAAAAAAAAAAAAGABAAAAAAAAAAAAAHABAAAAAAAAAAAAAIABAAAAAAAAAAAAAJABAAAAABAAAAAAAKABAAAAABAAAAAAALABAAAAAAAAAAAAAMABAAAAAAAAAAAAANABAAAAAAAAAAAAACABAAAAAAAAAAAAABABAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA0AAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAAsAAAAAAAAAAAABAAAAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAABAAQAAAAAAAAAAAABAAUAAAAAAAAAAAABAAYAAAAAAAAAAAABAAcAAAAAAAAAAAABAAgAAAAAAAAAAAABAAkAAAAAAAAAAAABAAoAAAAAAAAAAAABAAsAAAAAAAAAAAABAAwAAAAAAAAAAAABAA0AAAAAAAAAAAABAA4AAAAAAAAAAAABAA8AAAAAAAAAAAACAAAAAAAAAAAAAAACAAQAAAAAAAAAAAACAAUAAAAAAAAAAAACAAYAAAAAAAAAAAACAAcAAAAAAAAAAAACAAgAAAAAAAAAAAACAAkAAAAAAAAAAAACAAoAAAAAAAAAAAACAAsAAAAAAAAAAAACAAwAAAAAAAAAAAACAA0AAAAAAAAAAAACAA4AAAAAAAAAAAACAA8AAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAQAAAAAAAAAAAADAAUAAAAAAAAAAAADAAYAAAAAAAAAAAADAAcAAAAAAAAAAAADAAgAAAAAAAAAAAADAAkAAAAAAAAAAAADAAoAAAAAAAAAAAADAAsAAAAAAAAAAAADAAwAAAAAAAAAAAADAA0AAAAAAAAAAAADAA4AAAAAAAAAAAADAA8AAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAQAAAAAAAAAAAAEAAUAAAAAAAAAAAAEAAYAAAAAAAAAAAAEAAcAAAAAAAAAAAAEAAgAAAAAAAAAAAAEAAkAAAAAAAAAAAAEAAoAAAAAAAAAAAAEAAsAAAAAAAAAAAAEAAwAAAAAAAAAAAAEAA0AAAAAAAAAAAAEAA4AAAAAAAAAAAAEAA8AAAAAAAAAAAAFAAAAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAYAAAAAAAAAAAAFAAcAAAAAAAAAAAAFAAgAAAAAAAAAAAAFAAkAAAAAAAAAAAAFAAoAAAAAAAAAAAAFAAsAAAAAAAAAAAAFAAwAAAAAAAAAAAAFAA0AAAAAAAAAAAAFAA4AAAAAAAAAAAAFAA8AAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAgAAAAAAAAAAAAGAAkAAAAAAAAAAAAGAAoAAAAAAAAAAAAGAAsAAAAAAAAAAAAGAAwAAAAAAAAAAAAGAA0AAAAAAAAAAAAGAA4AAAAAAAAAAAAGAA8AAAAAAAAAAAAHAAAAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAHAAMAAAAAAAAAAAAHAAQAAAAAAAAAAAAHAAUAAAAAAAAAAAAHAAYAAAAAAAAAAAAHAAcAAAAAAAAAAAAHAAgAAAAAAAAAAAAHAAkAAAAAAAAAAAAHAAoAAAAAAAAAAAAHAAsAAAAAAAAAAAAHAAwAAAAAAAAAAAAHAA0AAAAAAAAAAAAHAA4AAAAAAAAAAAAHAA8AAAAAAAAAAAAIAAAAAAAAAAAAAAAIAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAIAAMAAAAAAAAAAAAIAAQAAAAAAAAAAAAIAAUAAAAAAAAAAAAIAAYAAAAAAAAAAAAIAAcAAAAAAAAAAAAIAAgAAAAAAAAAAAAIAAkAAAAAAAAAAAAIAAoAAAAAAAAAAAAIAAsAAAAAAAAAAAAIAAwAAAAAAAAAAAAIAA0AAAAAAAAAAAAIAA4AAAAAAAAAAAAIAA8AAAAAAAAAAAAOABAAAAAAAAAAAAAPABAAAAAAAAAAAAAQABAAAAAAAAAAAAARABAAAAAAAAAAAAASABAAAAAAAAAAAAATABAAAAAAAAAAAAAUABAAAAAAAAAAAAAVABAAAAAAAAAAAAAWABAAAAAAAAAAAAAXABAAAAAAAAAAAAAYABAAAAAAAAAAAAAZABAAAAAAAAAAAAAaABAAAAAAAAAAAAAbABAAAAAAAAAAAAAcABAAAAAAAAAAAAAdABAAAAAAAAAAAAAeABAAAAAAAAAAAAAfABAAAAAAAAAAAAAgAAAAAAAAAAAAAAAgAAEAAAAAAAAAAAAgAAIAAAAAAAAAAAAgAAMAAAAAAAAAAAAgAAQAAAAAAAAAAAAgAAUAAAAAAAAAAAAgAAYAAAAAAAAAAAAgAAcAAAAAAAAAAAAgAAgAAAAAAAAAAAAgAAkAAAAAAAAAAAAgAAoAAAAAAAAAAAAgAAsAAAAAAAAAAAAgAAwAAAAAAAAAAAAgAA0AAAAAAAAAAAAgAA4AAAAAAAAAAAAgAA8AAAAAAAAAAAAgABAAAAAAAAAAAAAhAAAAAAAAAAAAAAAhAAEAAAAAAAAAAAAhAAIAAAAAAAAAAAAhAAMAAAAAAAAAAAAhAAQAAAAAAAAAAAAhAAUAAAAAAAAAAAAhAAYAAAAAAAAAAAAhAAcAAAAAAAAAAAAhAAgAAAAAAAAAAAAhAAkAAAAAAAAAAAAhAAoAAAAAAAAAAAAhAAsAAAAAAAAAAAAhAAwAAAAAAAAAAAAhAA0AAAAAAAAAAAAhAA4AAAAAAAAAAAAhAA8AAAAAAAAAAAAhABAAAAAAAAAAAAAiAAAAAAAAAAAAAAAiAAEAAAAAAAAAAAAiAAIAAAAAAAAAAAAiAAMAAAAAAAAAAAAiAAQAAAAAAAAAAAAiAAUAAAAAAAAAAAAiAAYAAAAAAAAAAAAiAAcAAAAAAAAAAAAiAAgAAAAAAAAAAAAiAAkAAAAAAAAAAAAiAAoAAAAAAAAAAAAiAAsAAAAAAAAAAAAiAAwAAAAAAAAAAAAiAA0AAAAAAAAAAAAiAA4AAAAAAAAAAAAiAA8AAAAAAAAAAAAiABAAAAAAAAAAAAAjAAAAAAAAAAAAAAAjAAEAAAAAAAAAAAAjAAIAAAAAAAAAAAAjAAMAAAAAAAAAAAAjAAQAAAAAAAAAAAAjAAUAAAAAAAAAAAAjAAYAAAAAAAAAAAAjAAcAAAAAAAAAAAAjAAgAAAAAAAAAAAAjAAkAAAAAAAAAAAAjAAoAAAAAAAAAAAAjAAsAAAAAAAAAAAAjAAwAAAAAAAAAAAAjAA0AAAAAAAAAAAAjAA4AAAAAAAAAAAAjAA8AAAAAAAAAAAAjABAAAAAAAAAAAAAKAAAAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAUAAAAAAAAAAAAKAAYAAAABAAAAAAAKAAcAAAABAAAAAAAKAAgAAAABAAAAAAAKAAkAAAABAAAAAAAKAAoAAAABAAAAAAAKAAsAAAABAAAAAAAKAAwAAAABAAAAAAAKAA0AAAABAAAAAAAKAA4AAAABAAAAAAAKAA8AAAABAAAAAAALAAAAAAAAAAAAAAALAAEAAAAAAAAAAAALAAIAAAAAAAAAAAALAAMAAAAAAAAAAAALAAQAAAAAAAAAAAALAAUAAAAAAAAAAAALAAYAAAABAAAAAAALAAcAAAABAAAAAAALAAgAAAAAAAAAAAALAAkAAAAAAAAAAAALAAoAAAAAAAAAAAALAAsAAAAAAAAAAAALAAwAAAAAAAAAAAALAA0AAAAAAAAAAAALAA4AAAAAAAAAAAALAA8AAAAAAAAAAAAMAAAAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAAMAAMAAAAAAAAAAAAMAAQAAAAAAAAAAAAMAAUAAAAAAAAAAAAMAAYAAAABAAAAAAAMAAcAAAABAAAAAAAMAAgAAAAAAAAAAAAMAAkAAAAAAAAAAAAMAAoAAAAAAAAAAAAMAAsAAAAAAAAAAAAMAAwAAAAAAAAAAAAMAA0AAAAAAAAAAAAMAA4AAAAAAAAAAAAMAA8AAAAAAAAAAAANAAAAAAAAAAAAAAANAAEAAAAAAAAAAAANAAIAAAAAAAAAAAANAAMAAAAAAAAAAAANAAQAAAAAAAAAAAANAAUAAAAAAAAAAAANAAYAAAABAAAAAAANAAcAAAABAAAAAAANAAgAAAAAAAAAAAANAAkAAAAAAAAAAAANAAoAAAAAAAAAAAANAAsAAAAAAAAAAAANAAwAAAAAAAAAAAANAA0AAAAAAAAAAAANAA4AAAAAAAAAAAANAA8AAAAAAAAAAAAOAAAAAAAAAAAAAAAOAAEAAAAAAAAAAAAOAAIAAAAAAAAAAAAOAAMAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAAAAAAOAAYAAAABAAAAAAAOAAcAAAABAAAAAAAOAAgAAAAAAAAAAAAOAAkAAAAAAAAAAAAOAAoAAAAAAAAAAAAOAAsAAAAAAAAAAAAOAAwAAAAAAAAAAAAOAA0AAAAAAAAAAAAOAA4AAAAAAAAAAAAOAA8AAAAAAAAAAAAPAAAAAAAAAAAAAAAPAAEAAAAAAAAAAAAPAAIAAAAAAAAAAAAPAAMAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAYAAAABAAAAAAAPAAcAAAABAAAAAAAPAAgAAAAAAAAAAAAPAAkAAAAAAAAAAAAPAAoAAAAAAAAAAAAPAAsAAAAAAAAAAAAPAAwAAAAAAAAAAAAPAA0AAAAAAAAAAAAPAA4AAAAAAAAAAAAPAA8AAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAEAAAAAAAAAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAAAAAAAAAAQAAYAAAABAAAAAAAQAAcAAAABAAAAAAAQAAgAAAAAAAAAAAAQAAkAAAAAAAAAAAAQAAoAAAAAAAAAAAAQAAsAAAAAAAAAAAAQAAwAAAAAAAAAAAAQAA0AAAAAAAAAAAAQAA4AAAAAAAAAAAAQAA8AAAAAAAAAAAARAAAAAAAAAAAAAAARAAEAAAAAAAAAAAARAAIAAAAAAAAAAAARAAMAAAAAAAAAAAARAAQAAAAAAAAAAAARAAUAAAAAAAAAAAARAAYAAAABAAAAAAARAAcAAAABAAAAAAARAAgAAAABAAAAAAARAAkAAAABAAAAAAARAAoAAAABAAAAAAARAAsAAAABAAAAAAARAAwAAAABAAAAAAARAA0AAAAAAAAAAAARAA4AAAAAAAAAAAARAA8AAAAAAAAAAAASAAAAAAAAAAAAAAASAAEAAAAAAAAAAAASAAIAAAAAAAAAAAASAAMAAAAAAAAAAAASAAQAAAAAAAAAAAASAAUAAAAAAAAAAAASAAYAAAABAAAAAAASAAcAAAABAAAAAAASAAgAAAABAAAAAAASAAkAAAABAAAAAAASAAoAAAABAAAAAAASAAsAAAABAAAAAAASAAwAAAABAAAAAAASAA0AAAAAAAAAAAASAA4AAAAAAAAAAAASAA8AAAAAAAAAAAATAAAAAAAAAAAAAAATAAEAAAAAAAAAAAATAAIAAAAAAAAAAAATAAMAAAAAAAAAAAATAAQAAAAAAAAAAAATAAUAAAAAAAAAAAATAAYAAAAAAAAAAAATAAcAAAAAAAAAAAATAAgAAAAAAAAAAAATAAkAAAAAAAAAAAATAAoAAAAAAAAAAAATAAsAAAABAAAAAAATAAwAAAABAAAAAAATAA0AAAAAAAAAAAATAA4AAAAAAAAAAAATAA8AAAAAAAAAAAAUAAAAAAAAAAAAAAAUAAEAAAAAAAAAAAAUAAIAAAAAAAAAAAAUAAMAAAAAAAAAAAAUAAQAAAAAAAAAAAAUAAUAAAAAAAAAAAAUAAYAAAAAAAAAAAAUAAcAAAAAAAAAAAAUAAgAAAAAAAAAAAAUAAkAAAAAAAAAAAAUAAoAAAAAAAAAAAAUAAsAAAABAAAAAAAUAAwAAAABAAAAAAAUAA0AAAAAAAAAAAAUAA4AAAAAAAAAAAAUAA8AAAAAAAAAAAAVAAAAAAAAAAAAAAAVAAEAAAAAAAAAAAAVAAIAAAAAAAAAAAAVAAMAAAAAAAAAAAAVAAQAAAAAAAAAAAAVAAUAAAAAAAAAAAAVAAYAAAAAAAAAAAAVAAcAAAAAAAAAAAAVAAgAAAAAAAAAAAAVAAkAAAAAAAAAAAAVAAoAAAAAAAAAAAAVAAsAAAABAAAAAAAVAAwAAAABAAAAAAAVAA0AAAAAAAAAAAAVAA4AAAAAAAAAAAAVAA8AAAAAAAAAAAAWAAAAAAAAAAAAAAAWAAEAAAAAAAAAAAAWAAIAAAAAAAAAAAAWAAMAAAAAAAAAAAAWAAQAAAAAAAAAAAAWAAUAAAAAAAAAAAAWAAYAAAAAAAAAAAAWAAcAAAAAAAAAAAAWAAgAAAAAAAAAAAAWAAkAAAAAAAAAAAAWAAoAAAAAAAAAAAAWAAsAAAABAAAAAAAWAAwAAAABAAAAAAAWAA0AAAAAAAAAAAAWAA4AAAAAAAAAAAAWAA8AAAAAAAAAAAAXAAAAAAAAAAAAAAAXAAEAAAAAAAAAAAAXAAIAAAAAAAAAAAAXAAMAAAAAAAAAAAAXAAQAAAAAAAAAAAAXAAUAAAAAAAAAAAAXAAYAAAAAAAAAAAAXAAcAAAAAAAAAAAAXAAgAAAAAAAAAAAAXAAkAAAAAAAAAAAAXAAoAAAAAAAAAAAAXAAsAAAABAAAAAAAXAAwAAAABAAAAAAAXAA0AAAAAAAAAAAAXAA4AAAAAAAAAAAAXAA8AAAAAAAAAAAAYAAAAAAAAAAAAAAAYAAEAAAAAAAAAAAAYAAIAAAAAAAAAAAAYAAMAAAAAAAAAAAAYAAQAAAAAAAAAAAAYAAUAAAAAAAAAAAAYAAYAAAAAAAAAAAAYAAcAAAAAAAAAAAAYAAgAAAAAAAAAAAAYAAkAAAAAAAAAAAAYAAoAAAAAAAAAAAAYAAsAAAABAAAAAAAYAAwAAAABAAAAAAAYAA0AAAAAAAAAAAAYAA4AAAAAAAAAAAAYAA8AAAAAAAAAAAAZAAAAAAABAAAAAAAZAAEAAAABAAAAAAAZAAIAAAABAAAAAAAZAAMAAAABAAAAAAAZAAQAAAABAAAAAAAZAAUAAAABAAAAAAAZAAYAAAABAAAAAAAZAAcAAAABAAAAAAAZAAgAAAABAAAAAAAZAAkAAAABAAAAAAAZAAoAAAABAAAAAAAZAAsAAAABAAAAAAAZAAwAAAABAAAAAAAZAA0AAAAAAAAAAAAZAA4AAAAAAAAAAAAZAA8AAAAAAAAAAAAaAAAAAAABAAAAAAAaAAEAAAABAAAAAAAaAAIAAAABAAAAAAAaAAMAAAABAAAAAAAaAAQAAAABAAAAAAAaAAUAAAABAAAAAAAaAAYAAAABAAAAAAAaAAcAAAABAAAAAAAaAAgAAAABAAAAAAAaAAkAAAABAAAAAAAaAAoAAAABAAAAAAAaAAsAAAABAAAAAAAaAAwAAAABAAAAAAAaAA0AAAAAAAAAAAAaAA4AAAAAAAAAAAAaAA8AAAAAAAAAAAAJAAAAAAAAAAAAAAAJAAEAAAAAAAAAAAAJAAIAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAQAAAAAAAAAAAAJAAUAAAAAAAAAAAAJAAYAAAABAAAAAAAJAAcAAAABAAAAAAAJAAgAAAABAAAAAAAJAAkAAAABAAAAAAAJAAoAAAABAAAAAAAJAAsAAAABAAAAAAAJAAwAAAABAAAAAAAJAA0AAAABAAAAAAAJAA4AAAABAAAAAAAJAA8AAAABAAAAAAAbAAAAAAAAAAAAAAAcAAEAAAAAAAAAAAAcAAIAAAAAAAAAAAAcAAMAAAAAAAAAAAAdAAQAAAAAAAAAAAAdAAUAAAAAAAAAAAAeAAYAAAAAAAAAAAAfAAcAAAAAAAAAAAAfAAgAAAAAAAAAAAAfAAkAAAAAAAAAAAAfAAoAAAAAAAAAAAAfAAsAAAAAAAAAAAAfAAYAAAAAAAAAAAAfAAUAAAAAAAAAAAAfAAQAAAAAAAAAAAAfAAMAAAAAAAAAAAAfAAIAAAAAAAAAAAAeAAEAAAAAAAAAAAAeAAAAAAAAAAAAAAAeAAIAAAAAAAAAAAAfAAEAAAAAAAAAAAAfAAAAAAAAAAAAAAAeAAQAAAAAAAAAAAAeAAUAAAAAAAAAAAAeAAMAAAAAAAAAAAAdAAEAAAAAAAAAAAAdAAAAAAAAAAAAAAAdAAIAAAAAAAAAAAAdAAMAAAAAAAAAAAAcAAAAAAAAAAAAAAAbAAEAAAAAAAAAAAAbAAIAAAAAAAAAAAAbAAMAAAAAAAAAAAAbAAQAAAAAAAAAAAAbAAUAAAAAAAAAAAAbAAYAAAAAAAAAAAAbAAcAAAAAAAAAAAAbAAgAAAAAAAAAAAAbAAkAAAAAAAAAAAAbAAoAAAAAAAAAAAAbAAsAAAAAAAAAAAAbAAwAAAAAAAAAAAAbAA0AAAAAAAAAAAAbAA4AAAAAAAAAAAAbAA8AAAAAAAAAAAAcAAQAAAAAAAAAAAAcAAUAAAAAAAAAAAAcAAYAAAAAAAAAAAAcAAcAAAAAAAAAAAAcAAgAAAAAAAAAAAAcAAkAAAAAAAAAAAAcAAoAAAAAAAAAAAAcAAsAAAAAAAAAAAAcAAwAAAAAAAAAAAAcAA0AAAAAAAAAAAAcAA4AAAAAAAAAAAAcAA8AAAAAAAAAAAAdAAYAAAAAAAAAAAAdAAcAAAAAAAAAAAAdAAgAAAAAAAAAAAAdAAkAAAAAAAAAAAAdAAoAAAAAAAAAAAAdAAsAAAAAAAAAAAAdAAwAAAAAAAAAAAAdAA0AAAAAAAAAAAAdAA4AAAAAAAAAAAAdAA8AAAAAAAAAAAAeAAcAAAAAAAAAAAAeAAgAAAAAAAAAAAAeAAkAAAAAAAAAAAAeAAoAAAAAAAAAAAAeAAsAAAAAAAAAAAAeAAwAAAAAAAAAAAAeAA0AAAAAAAAAAAAeAA4AAAAAAAAAAAAeAA8AAAAAAAAAAAAfAAwAAAAAAAAAAAAfAA0AAAAAAAAAAAAfAA4AAAAAAAAAAAAfAA8AAAAAAAAAAAAJABEAAAABAAAAAAAKABEAAAABAAAAAAALABEAAAAAAAAAAAAMABEAAAAAAAAAAAANABEAAAAAAAAAAAAOABEAAAAAAAAAAAAPABEAAAAAAAAAAAAQABEAAAAAAAAAAAARABEAAAAAAAAAAAASABEAAAAAAAAAAAATABEAAAAAAAAAAAAUABEAAAAAAAAAAAAVABEAAAAAAAAAAAAWABEAAAAAAAAAAAAXABEAAAAAAAAAAAAYABEAAAAAAAAAAAAZABEAAAAAAAAAAAAaABEAAAAAAAAAAAAbABEAAAAAAAAAAAAcABEAAAAAAAAAAAAdABEAAAAAAAAAAAAeABEAAAAAAAAAAAAfABEAAAAAAAAAAAAgABEAAAAAAAAAAAAhABEAAAAAAAAAAAAiABEAAAAAAAAAAAAjABEAAAAAAAAAAAAIABEAAAAAAAAAAAAHABEAAAAAAAAAAAAGABEAAAAAAAAAAAAFABEAAAAAAAAAAAAEABEAAAAAAAAAAAADABEAAAAAAAAAAAACABEAAAAAAAAAAAABABEAAAAAAAAAAAAAABEAAAAAAAAAAAA=")
-tile_set = ExtResource("1_ig7tw")
-
-[node name="EntitySpawner" type="Marker2D" parent="World/Level"]
-position = Vector2(832, 0)
-script = ExtResource("2_0xm2m")
-metadata/_custom_type_script = "uid://d4nicrvnpmdng"
-
-[node name="Path2D" type="Path2D" parent="World/Level"]
-curve = SubResource("Curve2D_ig7tw")
-
-[node name="Enemy" parent="World/Level/Path2D" instance=ExtResource("3_h2yge")]
-position = Vector2(832, -16)
-
-[node name="Turret" parent="World/Level" instance=ExtResource("3_1bvp3")]
-position = Vector2(752, 312)
-
-[node name="HomePoint" parent="World/Level" instance=ExtResource("6_7mycd")]
-position = Vector2(824, 384)
-
-[node name="Control" type="Control" parent="."]
+[node name="GameScreen" type="Control" parent="UI"]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("7_kek77")
+metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TileSelector" type="TextureRect" parent="UI/GameScreen"]
+layout_mode = 0
+mouse_filter = 2
+texture = ExtResource("7_5vw27")
+metadata/_edit_use_anchors_ = true
+
+[node name="TopBar" type="Panel" parent="UI/GameScreen"]
+custom_minimum_size = Vector2(300, 40)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_right = 150.0
+offset_bottom = 40.0
 grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TopBar" type="Panel" parent="Control/VBoxContainer"]
-custom_minimum_size = Vector2(200, 60)
-layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_7mycd")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/TopBar"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/GameScreen/TopBar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -97,63 +85,298 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer/TopBar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GameScreen/TopBar/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/TopBar/MarginContainer/HBoxContainer"]
+[node name="WaveLabel" type="Label" parent="UI/GameScreen/TopBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "LIFE: 1"
+text = "Wave: 0"
 horizontal_alignment = 1
 
-[node name="VSpacer" type="Control" parent="Control/VBoxContainer"]
+[node name="LifeLabel" type="Label" parent="UI/GameScreen/TopBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 3
+text = "Lives: 1"
+horizontal_alignment = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Control/VBoxContainer"]
+[node name="EnergyLabel" type="Label" parent="UI/GameScreen/TopBar/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Energy: 1"
+horizontal_alignment = 1
+
+[node name="PauseButton" type="Button" parent="UI/GameScreen"]
 visible = false
-layout_mode = 2
-size_flags_vertical = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Pause"
 
-[node name="SubViewport" type="SubViewport" parent="Control/VBoxContainer/SubViewportContainer"]
-handle_input_locally = false
-render_target_update_mode = 0
-
-[node name="BottomBar" type="Panel" parent="Control/VBoxContainer"]
-custom_minimum_size = Vector2(0, 80)
-layout_mode = 2
+[node name="BottomBar" type="Panel" parent="UI/GameScreen"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 size_flags_vertical = 8
 theme_override_styles/panel = SubResource("StyleBoxFlat_272bh")
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer/BottomBar"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/GameScreen/BottomBar"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -67.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="BuildingBar" type="HBoxContainer" parent="UI/GameScreen/BottomBar/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+script = ExtResource("7_272bh")
+
+[node name="Button" type="Button" parent="UI/GameScreen/BottomBar/MarginContainer/BuildingBar"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+tooltip_text = "Carrot Tower"
+theme = ExtResource("8_4c57u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
+toggle_mode = true
+icon = SubResource("AtlasTexture_kek77")
+script = ExtResource("7_dg77c")
+building_type = 1
+metadata/_custom_type_script = "uid://dldlrtk00hikh"
+
+[node name="Button2" type="Button" parent="UI/GameScreen/BottomBar/MarginContainer/BuildingBar"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("8_4c57u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
+toggle_mode = true
+text = "B2"
+script = ExtResource("7_dg77c")
+metadata/_custom_type_script = "uid://dldlrtk00hikh"
+
+[node name="Button3" type="Button" parent="UI/GameScreen/BottomBar/MarginContainer/BuildingBar"]
+visible = false
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+theme = ExtResource("8_4c57u")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
+toggle_mode = true
+text = "B3"
+script = ExtResource("7_dg77c")
+metadata/_custom_type_script = "uid://dldlrtk00hikh"
+
+[node name="HelpButton" type="Button" parent="UI/GameScreen/BottomBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+offset_right = 44.0
+grow_vertical = 0
+text = "Help"
+
+[node name="BuildingInfoContainer" type="PanelContainer" parent="UI/GameScreen/BottomBar"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -22.3333
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ycdy4")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/GameScreen/BottomBar/BuildingInfoContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="BuildingInfo" type="RichTextLabel" parent="UI/GameScreen/BottomBar/BuildingInfoContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/bold_font_size = 12
+bbcode_enabled = true
+text = "[b]sad[/b]
+Cost
+as"
+fit_content = true
+
+[node name="QuickMenu" type="Control" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GameWinScreen" type="Control" parent="UI"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("8_w48qg")
+
+[node name="TextureRect" type="TextureRect" parent="UI/GameWinScreen"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_bottom = 8
+texture = ExtResource("8_ycdy4")
+expand_mode = 1
 
-[node name="BuildingBar" type="HBoxContainer" parent="Control/VBoxContainer/BottomBar/MarginContainer"]
+[node name="Panel" type="Panel" parent="UI/GameWinScreen/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/GameWinScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GameWinScreen/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/GameWinScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "SUCCESS!"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="UI/GameWinScreen/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return To Menu"
+
+[node name="GameLossScreen" parent="UI" instance=ExtResource("8_dg77c")]
+unique_name_in_owner = true
+visible = false
+
+[node name="StartMenu" type="Control" parent="UI"]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_4c57u")
+
+[node name="TextureRect" type="TextureRect" parent="UI/StartMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_ycdy4")
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/StartMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/StartMenu/CenterContainer"]
 layout_mode = 2
 alignment = 1
-script = ExtResource("7_272bh")
 
-[node name="Button" type="Button" parent="Control/VBoxContainer/BottomBar/MarginContainer/BuildingBar"]
-custom_minimum_size = Vector2(64, 0)
+[node name="Panel" type="Panel" parent="UI/StartMenu/CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
-text = "B1"
 
-[node name="Button2" type="Button" parent="Control/VBoxContainer/BottomBar/MarginContainer/BuildingBar"]
-custom_minimum_size = Vector2(64, 0)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
-text = "B2"
+[node name="Label" type="Label" parent="UI/StartMenu/CenterContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -22.3333
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_outline_size = 64
+theme_override_font_sizes/font_size = 64
+text = "Plants  vs.
+             Gophers"
 
-[node name="Button3" type="Button" parent="Control/VBoxContainer/BottomBar/MarginContainer/BuildingBar"]
-custom_minimum_size = Vector2(64, 0)
+[node name="PlayButton" type="Button" parent="UI/StartMenu/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_0xm2m")
-text = "B3"
+text = "PLAY"
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/StartMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LevelSelector" type="FlowContainer" parent="UI/StartMenu/CenterContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+vertical = true
+
+[node name="Button" type="Button" parent="UI/StartMenu/CenterContainer/VBoxContainer/PanelContainer/LevelSelector"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "Level 1"
+
+[node name="Button2" type="Button" parent="UI/StartMenu/CenterContainer/VBoxContainer/PanelContainer/LevelSelector"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "Level 2"
+
+[node name="Button3" type="Button" parent="UI/StartMenu/CenterContainer/VBoxContainer/PanelContainer/LevelSelector"]
+visible = false
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 2
+text = "Level 3"
+
+[node name="HelpScreen" parent="UI" instance=ExtResource("11_dg77c")]
+unique_name_in_owner = true
+visible = false
+
+[node name="World" type="Node2D" parent="."]
+visible = false
+script = ExtResource("1_4c57u")

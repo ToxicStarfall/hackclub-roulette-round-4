@@ -4,8 +4,10 @@ extends Area2D
 
 @export var velocity: Vector2
 @export var damageable: bool = true
+
 var faction: Entity.Factions
 var HealthComp: HealthComponent
+
 
 func _ready() -> void:
 	#super()
@@ -13,11 +15,12 @@ func _ready() -> void:
 	_setup()
 	$VisibleOnScreenNotifier2D.screen_exited.connect( func(): queue_free() )
 
+
 func _setup() -> void:
 	if has_node("HealthComponent"): HealthComp = $HealthComponent
-	#if HealthComp:
+	if HealthComp:
 		#HealthComp.health_damaged.connect( _on_health_damaged )
-		#HealthComp.health_zero.connect( _on_health_zero )
+		HealthComp.health_zero.connect( _on_health_zero )
 
 
 func _physics_process(delta: float) -> void:
@@ -33,9 +36,21 @@ func _physics_process(delta: float) -> void:
 func _on_hitbox_hit(damage):
 	if damageable:
 		#HealthComp.apply_damage(damage)
-		queue_free()
+		#queue_free()
+		pass
 	else: print(self, " is immune.")
+
+func _on_health_zero():
+	queue_free()
+
+
+func hit(damage):
+	var DamageComp = Damage.new()
+	DamageComp.value = damage
+	HealthComp.apply_damage(DamageComp)
 
 
 func get_damage():
 	if has_node("AttackComponent"): return get_node("AttackComponent").DamageComp
+
+	#HealthComp.apply_damage(damage)  # If Damage is retrieved, then projectile has hit something.

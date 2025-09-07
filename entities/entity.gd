@@ -63,7 +63,7 @@ func setup():
 	add_to_group("entities")
 
 
-func _on_hitbox_hit(damage: Damage):
+func _on_hitbox_hit(damage: Damage, inflictor):
 	if damageable:
 		HealthComp.apply_damage(damage)
 	else: print(self, " is immune.")
@@ -96,6 +96,10 @@ func kill():
 	#else:
 		#await $"SparksParticles".finished
 	queue_free()
+
+
+func hit(damage: Damage):
+	if HealthComp: HealthComp.apply_damage(damage)
 
 
 func get_health():

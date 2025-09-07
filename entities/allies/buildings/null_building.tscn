@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://coavctta736an"]
+
+[ext_resource type="Script" uid="uid://c8l8o2j2kosa6" path="res://entities/allies/buildings/building.gd" id="1_fjhu7"]
+[ext_resource type="Texture2D" uid="uid://ona7fs5aqntt" path="res://icon.svg" id="2_0npoa"]
+
+[node name="Building" type="CharacterBody2D"]
+script = ExtResource("1_fjhu7")
+energy_cost = 0
+metadata/_custom_type_script = "uid://c8l8o2j2kosa6"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_0npoa")

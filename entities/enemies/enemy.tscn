@@ -1,25 +1,78 @@
-[gd_scene load_steps=12 format=3 uid="uid://cx7408xn61vd7"]
+[gd_scene load_steps=18 format=3 uid="uid://cx7408xn61vd7"]
 
 [ext_resource type="Script" uid="uid://ci4du2v0sne0a" path="res://entities/enemies/enemy.gd" id="1_msovg"]
-[ext_resource type="Texture2D" uid="uid://ona7fs5aqntt" path="res://icon.svg" id="2_wqcwe"]
+[ext_resource type="Texture2D" uid="uid://pii81y36pht8" path="res://maps/gopher.png" id="2_gj3y3"]
 [ext_resource type="Script" uid="uid://ccd6qsohrm1y6" path="res://entities/states/state_machine.gd" id="3_5lf1o"]
 [ext_resource type="Script" uid="uid://cqnbkier15avq" path="res://components/health_component.gd" id="3_gj3y3"]
 [ext_resource type="Script" uid="uid://cpo5j3cl63n8g" path="res://entities/states/follow_path.gd" id="3_msovg"]
 [ext_resource type="Script" uid="uid://bh6cqtnko4j6x" path="res://components/attack_component.gd" id="4_56i32"]
-[ext_resource type="Script" uid="uid://d04s5a06kemh" path="res://components/resources/damage.gd" id="5_gj3y3"]
-[ext_resource type="Script" uid="uid://d0y3o51r8gh1i" path="res://components/hitbox_component.gd" id="5_sb13e"]
+[ext_resource type="Script" uid="uid://baxyjmy63ctfl" path="res://components/resources/damage.gd" id="5_gj3y3"]
+[ext_resource type="Script" uid="uid://wopkfxqak7ap" path="res://components/hitbox_component.gd" id="5_sb13e"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipr6v"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj3y3"]
+atlas = ExtResource("2_gj3y3")
+region = Rect2(0, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56i32"]
+atlas = ExtResource("2_gj3y3")
+region = Rect2(33, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sb13e"]
+atlas = ExtResource("2_gj3y3")
+region = Rect2(66, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3udgd"]
+atlas = ExtResource("2_gj3y3")
+region = Rect2(165, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vabdn"]
+atlas = ExtResource("2_gj3y3")
+region = Rect2(132, 0, 32, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrfwl"]
+atlas = ExtResource("2_gj3y3")
+region = Rect2(99, 0, 32, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5xow2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj3y3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56i32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sb13e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56i32")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3udgd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vabdn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrfwl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vabdn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3udgd"]
+size = Vector2(20, 38)
 
 [sub_resource type="Resource" id="Resource_56i32"]
 script = ExtResource("5_gj3y3")
 value = 1
 source = 1
 metadata/_custom_type_script = "uid://d04s5a06kemh"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3udgd"]
-size = Vector2(32, 32)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -28,11 +81,20 @@ script = ExtResource("1_msovg")
 metadata/_custom_type_script = "uid://ci4du2v0sne0a"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_wqcwe")
+visible = false
+position = Vector2(0, -5)
+texture = ExtResource("2_gj3y3")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 48)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_5xow2")
+autoplay = "default"
+frame_progress = 0.61608
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ipr6v")
+shape = SubResource("RectangleShape2D_3udgd")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("3_gj3y3")
@@ -47,7 +109,6 @@ metadata/_custom_type_script = "uid://bh6cqtnko4j6x"
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 0
 script = ExtResource("5_sb13e")
-metadata/_custom_type_script = "uid://d0y3o51r8gh1i"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_3udgd")

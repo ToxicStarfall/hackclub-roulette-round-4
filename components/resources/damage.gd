@@ -7,7 +7,7 @@ enum Source {
 }
 enum Types {
 	BASIC,
-	# Elemental
+	ELEMENTAL,
 }
 enum Modifiers {
 	NORMAL, PIERCING, BLUNT

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://wot8ix1kfuhb"]
+
+[ext_resource type="Script" uid="uid://c13mxaje3kc5u" path="res://maps/objects/build_point.gd" id="1_qo68w"]
+[ext_resource type="Texture2D" uid="uid://q5ovr4uhnmm1" path="res://maps/path.png" id="2_ueo70"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ueo70"]
+radius = 24.0
+
+[node name="BuildPoint" type="Area2D"]
+script = ExtResource("1_qo68w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_ueo70")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ueo70")
